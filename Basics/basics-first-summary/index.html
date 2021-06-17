@@ -19,6 +19,8 @@
         <h2>My Course Goal</h2>
         <p>{{ courseGoal }}</p>
         <p>Learn more about <a v-bind:href="vueLink">Vue</a> .</p>
+        <p>{{ outputGoal() }}</p>
+        <p v-html="htmlGoal"></p>
     </section>
 </body>
 
