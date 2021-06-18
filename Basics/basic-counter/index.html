@@ -28,12 +28,17 @@
         <p v-once>Starting Count: {{ counter }}</p>
 
         <!-- <input type="text" v-on:input="setName" v-bind:value="name" placeholder="Type your name here..." /> -->
-        <input type="text" v-model="name" />
+        <input type="text" v-model="name" placeholder="First name..." />
+        <input type="text" v-model="lastName" placeholder="Last name..." />
         <button v-on:click="resetInput">Reset Input</button>
-        <p>Your Name: {{ name }}</p>
+        <p>Your Name: {{ fullname }}</p>
 
         <input type="text" v-on:input="setCoder($event, 'is the best coder')" placeholder="Type your name here..." />
         <p>Yes you, {{ coder }} </p>
+        <!-- Not good to use -->
+        <!-- <p>{{ outputFullName() }}</p> -->
+
+        <!-- <p>{{ fullname }}</p> -->
 
         <form v-on:submit="submitForm">
             <input type="text" />
@@ -48,6 +53,7 @@
         <p>Learn Vue Key Events</p>
         <input type="text" placeholder="Type your nickname here..." v-on:keyup.enter="setNickname" />
         <p>Nickname: {{nickname}}</p>
+        <p>{{ me }}</p>
 
     </section>
 </body>
