@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Vue Course Goals</h1>
+    </header>
+    <section id="user-goals">
+        <h2>My course goals</h2>
+        <input type="text" placeholder="Enter your goal" v-model="enteredGoal" v-on:keyup.enter="addGoal" />
+        <button @click="addGoal">Add Goal</button>
+        <!-- <p v-show="goals.length === 0">No goals have been added yet - please start adding some!</p> -->
+        <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
+        <!-- <ul v-if="goals.length > 0">
+            <li>Goal</li>
+        </ul> -->
+        <ul v-else>
+            <li v-for="(goal, index) in goals">
+                <p>{{index + 1}}. {{ goal }}</p>
+                <i class="fas fa-trash" @click="removeGoal(index)"></i>
+            </li>
+        </ul>
+        <!-- <ul>
+            <li v-for="num in 10"> {{ num }} </li>
+        </ul> -->
+        <!-- <ul>
+            <li v-for="(value, key) in {name: 'Tidbit', age: 5}"> {{key}} : {{value}} </li>
+        </ul> -->
+        <!-- <ul v-else>
+            <li v-for="(goal, index) in goals" :key="goal + index" @click="removeGoal(index)">
+                <p>{{index + 1}}. {{ goal }}</p>
+                <input type="text" @click.stop >
+            </li>
+        </ul> -->
+    </section>
+</body>
+
+</html>
