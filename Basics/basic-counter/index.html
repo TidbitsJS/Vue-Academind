@@ -21,7 +21,34 @@
         <!-- <button v-on:click="counter++">Add</button> -->
         <button v-on:click="decrement">Remove</button>
         <!-- <button v-on:click="counter = counter - 1">Remove</button> -->
+
+        <button v-on:click="addFive(5)">Add 5</button>
+        <button v-on:click.right="reduceFive(5)">Reduce 5</button>
         <p>Result: {{ counter }}</p>
+        <p v-once>Starting Count: {{ counter }}</p>
+
+        <!-- <input type="text" v-on:input="setName" v-bind:value="name" placeholder="Type your name here..." /> -->
+        <input type="text" v-model="name" />
+        <button v-on:click="resetInput">Reset Input</button>
+        <p>Your Name: {{ name }}</p>
+
+        <input type="text" v-on:input="setCoder($event, 'is the best coder')" placeholder="Type your name here..." />
+        <p>Yes you, {{ coder }} </p>
+
+        <form v-on:submit="submitForm">
+            <input type="text" />
+            <button>Sign Up</button>
+        </form>
+        <p>Using Vue events</p>
+        <form v-on:submit.prevent="submitNextForm">
+            <input type="number" />
+            <button>Log In</button>
+        </form>
+
+        <p>Learn Vue Key Events</p>
+        <input type="text" placeholder="Type your nickname here..." v-on:keyup.enter="setNickname" />
+        <p>Nickname: {{nickname}}</p>
+
     </section>
 </body>
 
