@@ -4,8 +4,18 @@
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact></friend-contact>
-      <friend-contact></friend-contact>
+      <friend-contact
+        name="Tidbits JS"
+        phone="91 5874 0062"
+        email-address="tidbitsjs@gmail.com"
+        is-favorite="1"
+      ></friend-contact>
+      <friend-contact
+        name="Enola Holmes"
+        phone="91 5854 1265"
+        email-address="enolaholmes@gmail.com"
+        is-favorite="0"
+      ></friend-contact>
     </ul>
   </section>
 </template>
@@ -89,6 +99,7 @@ header {
   background-color: #ff0077;
   color: white;
   padding: 0.5rem 1rem;
+  margin: 0.5rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
 }
 
