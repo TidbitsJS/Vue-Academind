@@ -3,6 +3,7 @@
     <header>
       <h1>My Friends</h1>
     </header>
+    <new-friend @add-contact="addFriendContact"></new-friend>
     <ul>
       <friend-contact
         v-for="friend in friends"
@@ -47,6 +48,17 @@ export default {
       );
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
     },
+    addFriendContact: function(name, phone, email) {
+      const newFriendContact = {
+        id: new Date().toISOString(),
+        name: name,
+        phone: phone,
+        email: email,
+        isFavorite: false,
+      };
+
+      this.friends.unshift(newFriendContact);
+    },
   },
 };
 </script>
@@ -82,7 +94,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -90,6 +103,32 @@ header {
   text-align: center;
   width: 90%;
   max-width: 40rem;
+}
+
+#app input {
+  width: 75%;
+  padding: 0.35rem 0.4rem;
+  font: inherit;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+}
+
+#app input:focus {
+  outline: none;
+  border-color: #1b995e;
+  background-color: #d7fdeb;
+}
+
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+  text-align: left;
+}
+
+#app form div {
+  margin: 1rem 0;
 }
 
 #app h2 {
@@ -116,5 +155,17 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+@media screen and (max-width: 600px) {
+  #app input {
+    width: 100%;
+  }
+
+  #app label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.2rem;
+  }
 }
 </style>
