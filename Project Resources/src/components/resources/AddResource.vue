@@ -49,7 +49,7 @@
           />
         </div>
         <div>
-          <base-button type="submit">Add Resource</base-button>
+          <base-button type="submit" mode="flat-add">Add Resource</base-button>
         </div>
       </form>
     </base-card>
@@ -82,6 +82,9 @@ export default {
       }
 
       this.addResource(enteredTitle, enteredDescription, enteredLink);
+      this.$refs.titleInput.value = "";
+      this.$refs.descriptionInput.value = "";
+      this.$refs.linkInput.value = "";
     },
     confirmError: function() {
       this.inputIsInvalid = false;

@@ -37,4 +37,15 @@ button:active {
 .flat:active {
   background-color: #edd2ff;
 }
+
+.flat-add {
+  background-color: #00a54a;
+  color: #fff;
+  border: none;
+}
+
+.flat-add:hover,
+.flat-add:active {
+  background-color: #07753e;
+}
 </style>

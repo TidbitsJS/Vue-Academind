@@ -12,4 +12,10 @@ div {
   margin: 2rem auto;
   max-width: 40rem;
 }
+
+@media screen and (max-width: 700px) {
+  div {
+    margin: 2rem 1rem;
+  }
+}
 </style>
