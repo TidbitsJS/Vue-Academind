@@ -1,20 +1,16 @@
 <template>
-  <ul>
-    <ResourceItem
-      v-for="resource in storedResources"
-      :key="resource.id"
-      :title="resource.title"
-      :description="resource.description"
-      :link="resource.link"
-    />
-  </ul>
+  <div>
+    <TheHeader title="RememberMe" />
+    <StoredResources :resources="storedResources" />
+  </div>
 </template>
 
 <script>
-import ResourceItem from "./components/resources/ResourceItem.vue";
+import TheHeader from "./components/layout/TheHeader.vue";
+import StoredResources from "./components/resources/StoredResources.vue";
 
 export default {
-  components: { ResourceItem },
+  components: { StoredResources, TheHeader },
   data() {
     return {
       storedResources: [
@@ -50,3 +46,19 @@ export default {
   },
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300;400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Alegreya Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
