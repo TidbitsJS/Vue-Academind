@@ -1,53 +1,90 @@
 <template>
-  <base-card>
-    <form @submit.prevent="submitData">
-      <div class="form-control">
-        <label for="title">Title</label>
-        <input
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Enter resource title"
-          ref="titleInput"
-        />
-      </div>
-      <div class="form-control">
-        <label for="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="5"
-          placeholder="Enter desciption of resource"
-          ref="descriptionInput"
-        />
-      </div>
-      <div class="form-control">
-        <label for="link">Link</label>
-        <input
-          id="link"
-          name="link"
-          type="url"
-          placeholder="Enter resource link"
-          ref="linkInput"
-        />
-      </div>
-      <div>
-        <base-button type="submit">Add Resource</base-button>
-      </div>
-    </form>
-  </base-card>
+  <div>
+    <base-dialogue
+      v-if="inputIsInvalid"
+      title="Invalid Input"
+      @close="confirmError"
+    >
+      <template #default>
+        <p>Unfortunately, at least one input value is invalid</p>
+        <p>
+          Please check all inputs and make sure you enter at least a few
+          characters into each input field.
+        </p>
+      </template>
+      <template #actions>
+        <base-button @click="confirmError">Okay</base-button>
+      </template>
+    </base-dialogue>
+    <base-card>
+      <form @submit.prevent="submitData">
+        <div class="form-control">
+          <label for="title">Title</label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Enter resource title"
+            ref="titleInput"
+          />
+        </div>
+        <div class="form-control">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="5"
+            placeholder="Enter desciption of resource"
+            ref="descriptionInput"
+          />
+        </div>
+        <div class="form-control">
+          <label for="link">Link</label>
+          <input
+            id="link"
+            name="link"
+            type="url"
+            placeholder="Enter resource link"
+            ref="linkInput"
+          />
+        </div>
+        <div>
+          <base-button type="submit">Add Resource</base-button>
+        </div>
+      </form>
+    </base-card>
+  </div>
 </template>
 
 <script>
+import BaseDialogue from "../Interface/BaseDialogue.vue";
 export default {
+  components: { BaseDialogue },
   inject: ["addResource"],
+  data: function() {
+    return {
+      inputIsInvalid: false,
+    };
+  },
   methods: {
     submitData: function() {
       const enteredTitle = this.$refs.titleInput.value;
       const enteredDescription = this.$refs.descriptionInput.value;
       const enteredLink = this.$refs.linkInput.value;
 
+      if (
+        enteredTitle.trim() === "" ||
+        enteredDescription.trim() === "" ||
+        enteredLink === ""
+      ) {
+        this.inputIsInvalid = true;
+        return;
+      }
+
       this.addResource(enteredTitle, enteredDescription, enteredLink);
+    },
+    confirmError: function() {
+      this.inputIsInvalid = false;
     },
   },
 };
