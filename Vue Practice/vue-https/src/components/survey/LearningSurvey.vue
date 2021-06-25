@@ -47,7 +47,8 @@
         <p v-if="invalidInput">
           One or more input fields are invalid. Please check your provided data.
         </p>
-        <div>
+        <p v-if="isError">{{ isError }}</p>
+        <div class="submit-btn">
           <base-button>Submit</base-button>
         </div>
       </form>
@@ -62,21 +63,18 @@ export default {
       enteredName: "",
       chosenRating: null,
       invalidInput: false,
+      isError: null,
     };
   },
-  // emits: ["survey-submit"],
   methods: {
     submitSurvey() {
       if (this.enteredName === "" || !this.chosenRating) {
         this.invalidInput = true;
         return;
       }
-      this.invalidInput = false;
 
-      // this.$emit("survey-submit", {
-      //   userName: this.enteredName,
-      //   rating: this.chosenRating,
-      // });
+      this.invalidInput = false;
+      this.isError = null;
 
       fetch(process.env.VUE_APP_FIREBASE_SERVER_URI + "/surveys.json", {
         method: "POST",
@@ -87,7 +85,18 @@ export default {
           name: this.enteredName,
           rating: this.chosenRating,
         }),
-      });
+      })
+        .then((res) => {
+          if (res.ok) {
+            // ...
+          } else {
+            throw new Error("Could not save data!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          this.isError = err.message;
+        });
 
       this.enteredName = "";
       this.chosenRating = null;
@@ -103,7 +112,20 @@ export default {
 
 input[type="text"] {
   display: block;
-  width: 20rem;
+  width: 90%;
   margin-top: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #000;
+  font-size: 0.9rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3a0061;
+  background-color: #f7ebff;
+}
+
+.submit-btn {
+  margin-top: 1rem;
 }
 </style>
