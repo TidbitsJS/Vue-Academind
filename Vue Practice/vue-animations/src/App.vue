@@ -1,18 +1,23 @@
 <template>
   <div>
     <div class="container">
+      <ListData />
+    </div>
+    <div class="container">
       <div class="block" :class="{ animate: animatedBlock }"></div>
       <button @click="animateBlock">Animate</button>
     </div>
     <div class="container">
       <transition
-        name="para"
+        :css="false"
         @before-enter="beforeEnter"
         @enter="enterElement"
         @after-enter="afterEnter"
         @before-leave="beforeLeave"
         @leave="leaveElement"
         @after-leave="afterLeave"
+        @enter-cancelled="enterCancelled"
+        @leave-cancelled="leaveCancelled"
       >
         <p v-if="paraIsVisible">This is only sometimes visible...</p>
       </transition>
@@ -43,7 +48,10 @@
 </template>
 
 <script>
+import ListData from "./components/ListData.vue";
+
 export default {
+  components: { ListData },
   data() {
     return {
       dialogIsVisible: false,
@@ -51,23 +59,55 @@ export default {
       paraIsVisible: false,
       paraNextVisible: false,
       usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null,
     };
   },
   methods: {
     beforeEnter: function(el) {
       console.log("Before enter animation", el);
+      el.style.opacity = 0;
     },
-    enterElement: function(el) {
+    enterElement: function(el, done) {
       console.log("Animation enters", el);
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01;
+        round++;
+
+        if (round > 100) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
     },
     beforeLeave: function(el) {
       console.log("Before leave animation", el);
+      el.style.opacity = 1;
+    },
+    enterCancelled: function(el) {
+      console.log("Enter cancelled", el);
+      clearInterval(this.enterInterval);
     },
     afterEnter: function(el) {
       console.log("After enter animation", el);
     },
-    leaveElement: function(el) {
+    leaveElement: function(el, done) {
       console.log("Animation leaves", el);
+      let round = 1;
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+
+        if (round > 100) {
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      }, 20);
+    },
+    leaveCancelled: function(el) {
+      console.log("Leave Cancelled", el);
+      clearInterval(this.leaveInterval);
     },
     afterLeave: function(el) {
       console.log("After leave animation", el);
