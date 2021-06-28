@@ -39,6 +39,7 @@ export default {
       return this.$store.dispatch("login");
     },
     logout() {
+      this.$router.push("/");
       return this.$store.dispatch("logout");
     },
   },

@@ -36,9 +36,13 @@ export default {
         (cartItem) => cartItem.productId === prodId
       );
       const prodData = state.items[productInCartIndex];
-      state.items.splice(productInCartIndex, 1);
-      state.qty -= prodData.qty;
-      state.total -= prodData.price * prodData.qty;
+      if (prodData.qty === 1) {
+        state.items.splice(productInCartIndex, 1);
+      }
+
+      prodData.qty -= 1;
+      state.total -= prodData.price;
+      state.qty -= 1;
     },
   },
   actions: {
