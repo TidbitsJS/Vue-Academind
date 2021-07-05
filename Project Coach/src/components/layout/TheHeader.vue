@@ -34,9 +34,9 @@ header a {
   border: 1px solid transparent;
 }
 
-a:active,
-a:hover,
-a.router-link-active {
+li a:active,
+li a:hover,
+li a.router-link-active {
   color: #000;
   border: 1px solid #fff;
   background: #fff;
