@@ -6,9 +6,10 @@ export default {
   namespaced: true,
   state() {
     return {
+      lastFetch: null,
       coaches: [
         {
-          id: "c1",
+          id: "c4",
           firstName: "Maximilian",
           lastName: "Schwarzmüller",
           areas: ["frontend", "backend", "career"],

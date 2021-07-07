@@ -51,8 +51,7 @@ export default {
       return this.selectedCoach.description;
     },
     contactLink() {
-      console.log(this.$route.START_LOCATION);
-      return this.$router.replace("/coaches/" + this.id + "/contact");
+      return "/coaches/" + this.id + "/contact";
     },
   },
   created() {

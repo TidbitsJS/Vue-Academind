@@ -30,6 +30,7 @@ export default {
     },
 
     coachContactLink() {
+      console.log("coachItem", this.id);
       return this.$route.path + "/" + this.id + "/contact";
     },
 
